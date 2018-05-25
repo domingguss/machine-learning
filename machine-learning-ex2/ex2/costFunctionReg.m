@@ -5,7 +5,7 @@ function [J, grad] = costFunctionReg(theta, X, y, lambda)
 %   gradient of the cost w.r.t. to the parameters. 
 
 % Initialize some useful values
-m = length(y); % number of training examples
+m = length(y);  % number of training examples
 
 % You need to return the following variables correctly 
 J = 0;

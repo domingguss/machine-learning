@@ -63,24 +63,32 @@ Theta2_grad = zeros(size(Theta2));
 %
 
 
+% -------------------------------------------------------------
+% calculate h-function
+a1 = [ones(m, 1) X];
 
+z2 = a1 * Theta1';
+a2 = sigmoid(z2);
+m  = size(z2, 1);
+a2 = [ones(m, 1), a2];
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+z3 = a2 * Theta2';
+h = sigmoid(z3);
 
 % -------------------------------------------------------------
+% compute cost in J
+s_t1 = Theta1(:,2:end);
+s_t2 = Theta2(:,2:end);
+reg1 = (lambda/(2*m)) .* sum(sum(s_t1.^2));
+reg2 = (lambda/(2*m)) .* sum(sum(s_t2.^2));
+
+y_matrix = eye(num_labels)(y,:);
+J = sum((1/m) .* sum( (-y_matrix .* log(h)) - ((1-y_matrix) .* log(1-h)) )) + reg1 + reg2;
+
+
+
+
+
 
 % =========================================================================
 
