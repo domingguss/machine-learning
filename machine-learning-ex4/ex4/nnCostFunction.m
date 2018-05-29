@@ -73,7 +73,7 @@ m  = size(z2, 1);
 a2 = [ones(m, 1), a2];
 
 z3 = a2 * Theta2';
-h = sigmoid(z3);
+a3 = sigmoid(z3);
 
 % -------------------------------------------------------------
 % compute cost in J
@@ -83,11 +83,25 @@ reg1 = (lambda/(2*m)) .* sum(sum(s_t1.^2));
 reg2 = (lambda/(2*m)) .* sum(sum(s_t2.^2));
 
 y_matrix = eye(num_labels)(y,:);
-J = sum((1/m) .* sum( (-y_matrix .* log(h)) - ((1-y_matrix) .* log(1-h)) )) + reg1 + reg2;
+J = sum((1/m) .* sum( (-y_matrix .* log(a3)) - ((1-y_matrix) .* log(1-a3)) )) + reg1 + reg2;
 
 
+% -------------------------------------------------------------
+% compute Theta1_grad and Theta2_grad using backpropagation algorithm
+d2 = zeros(m,hidden_layer_size);
+d3 = zeros(m,num_labels);
 
+d3 = a3 - y_matrix;
 
+d2 = (d3 * Theta2);
+d2 = d2(:,2:end);
+d2 = d2 .* sigmoidGradient(z2);
+
+Delta1 = d2' * a1;
+Delta2 = d3' * a2;
+
+Theta1_grad = (1/m) .* Delta1;
+Theta2_grad = (1/m) .* Delta2;
 
 
 % =========================================================================
