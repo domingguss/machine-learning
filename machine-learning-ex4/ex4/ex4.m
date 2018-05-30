@@ -41,8 +41,8 @@ sel = sel(1:100);
 
 displayData(X(sel, :));
 
-fprintf('Program paused. Press enter to continue.\n');
-pause;
+%fprintf('Program paused. Press enter to continue.\n');
+%pause;
 
 
 %% ================ Part 2: Loading Parameters ================
@@ -80,8 +80,8 @@ J = nnCostFunction(nn_params, input_layer_size, hidden_layer_size, ...
 fprintf(['Cost at parameters (loaded from ex4weights): %f '...
          '\n(this value should be about 0.287629)\n'], J);
 
-fprintf('\nProgram paused. Press enter to continue.\n');
-pause;
+%fprintf('\nProgram paused. Press enter to continue.\n');
+%pause;
 
 %% =============== Part 4: Implement Regularization ===============
 %  Once your cost function implementation is correct, you should now
@@ -99,8 +99,8 @@ J = nnCostFunction(nn_params, input_layer_size, hidden_layer_size, ...
 fprintf(['Cost at parameters (loaded from ex4weights): %f '...
          '\n(this value should be about 0.383770)\n'], J);
 
-fprintf('Program paused. Press enter to continue.\n');
-pause;
+%fprintf('Program paused. Press enter to continue.\n');
+%pause;
 
 
 %% ================ Part 5: Sigmoid Gradient  ================
@@ -116,8 +116,8 @@ fprintf('Sigmoid gradient evaluated at [-1 -0.5 0 0.5 1]:\n  ');
 fprintf('%f ', g);
 fprintf('\n\n');
 
-fprintf('Program paused. Press enter to continue.\n');
-pause;
+%fprintf('Program paused. Press enter to continue.\n');
+%pause;
 
 
 %% ================ Part 6: Initializing Pameters ================
@@ -126,7 +126,7 @@ pause;
 %  implementing a function to initialize the weights of the neural network
 %  (randInitializeWeights.m)
 
-fprintf('\nInitializing Neural Network Parameters ...\n')
+%fprintf('\nInitializing Neural Network Parameters ...\n')
 
 initial_Theta1 = randInitializeWeights(input_layer_size, hidden_layer_size);
 initial_Theta2 = randInitializeWeights(hidden_layer_size, num_labels);
@@ -146,8 +146,8 @@ fprintf('\nChecking Backpropagation... \n');
 %  Check gradients by running checkNNGradients
 checkNNGradients;
 
-fprintf('\nProgram paused. Press enter to continue.\n');
-pause;
+%fprintf('\nProgram paused. Press enter to continue.\n');
+%pause;
 
 
 %% =============== Part 8: Implement Regularization ===============
@@ -168,8 +168,8 @@ debug_J  = nnCostFunction(nn_params, input_layer_size, ...
 fprintf(['\n\nCost at (fixed) debugging parameters (w/ lambda = %f): %f ' ...
          '\n(for lambda = 3, this value should be about 0.576051)\n\n'], lambda, debug_J);
 
-fprintf('Program paused. Press enter to continue.\n');
-pause;
+%fprintf('Program paused. Press enter to continue.\n');
+%pause;
 
 
 %% =================== Part 8: Training NN ===================
@@ -183,10 +183,10 @@ fprintf('\nTraining Neural Network... \n')
 
 %  After you have completed the assignment, change the MaxIter to a larger
 %  value to see how more training helps.
-options = optimset('MaxIter', 50);
+options = optimset('MaxIter', 500);
 
 %  You should also try different values of lambda
-lambda = 1;
+lambda = 0;
 
 % Create "short hand" for the cost function to be minimized
 costFunction = @(p) nnCostFunction(p, ...
@@ -205,8 +205,8 @@ Theta1 = reshape(nn_params(1:hidden_layer_size * (input_layer_size + 1)), ...
 Theta2 = reshape(nn_params((1 + (hidden_layer_size * (input_layer_size + 1))):end), ...
                  num_labels, (hidden_layer_size + 1));
 
-fprintf('Program paused. Press enter to continue.\n');
-pause;
+%fprintf('Program paused. Press enter to continue.\n');
+%pause;
 
 
 %% ================= Part 9: Visualize Weights =================
@@ -216,7 +216,11 @@ pause;
 
 fprintf('\nVisualizing Neural Network... \n')
 
-displayData(Theta1(:, 2:end));
+data = Theta1(:, 2:end);
+displayData(data);
+figure;
+data = Theta2(:, 2:end);
+displayData(data, 5);
 
 fprintf('\nProgram paused. Press enter to continue.\n');
 pause;

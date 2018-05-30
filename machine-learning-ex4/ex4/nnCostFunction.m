@@ -103,6 +103,15 @@ Delta2 = d3' * a2;
 Theta1_grad = (1/m) .* Delta1;
 Theta2_grad = (1/m) .* Delta2;
 
+% -------------------------------------------------------------
+% add regularization
+
+Reg_Theta1 = [zeros(hidden_layer_size,1) s_t1];
+Reg_Theta2 = [zeros(num_labels,1) s_t2];
+
+Theta1_grad = (1/m) .* Delta1 + (lambda/m) .* Reg_Theta1;
+Theta2_grad = (1/m) .* Delta2 + (lambda/m) .* Reg_Theta2;
+
 
 % =========================================================================
 
