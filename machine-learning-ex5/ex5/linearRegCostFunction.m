@@ -24,9 +24,7 @@ h = X * theta;
 
 theta(1) = 0;
 
-theta_squared = theta .^2;
-
-J = 1/(2*m) * sum((h-y).^2) + (lambda/(2*m) * sum(theta_squared));
+J = 1/(2*m) * sum((h-y).^2) + (lambda/(2*m) * sum(theta .^2));
 
 grad = (1/m) .* (X' * (h-y)) + (lambda/m * theta);
 
