@@ -24,10 +24,39 @@ sigma = 0.3;
 %
 
 
+C_all = [0.01, 0.03, 0.1, 0.3, 1, 3, 10, 30];
+sigma_all = [0.01, 0.03, 0.1, 0.3, 1, 3, 10, 30];
+
+error = 100;
+optimal_C = 0;
+optimal_sigma = 0;
+
+for i=1:8
+  for j=1:8
+  break;break;
+    current_C = C_all(1,i);
+    current_sigma = sigma_all(1,j);
+    
+    fprintf("\ncurrent: C: %f sigma: %f\n", current_C, current_sigma);
+    
+    model = svmTrain(X, y, current_C, @(x1, x2) gaussianKernel(x1, x2, current_sigma));
+    predictions = svmPredict(model, Xval);
+
+    current_error = mean(double(predictions ~= yval));
+    
+    if current_error < error
+      fprintf("\nOPTIMAL ONE current_error: %f vs error %f\n\n", current_error, error);
+      error = current_error;
+      optimal_C = current_C;
+      optimal_sigma = current_sigma;
+    end    
+  end
+end
 
 
-
-
+    fprintf("OPTIMUM: C: %f sigma: %f", optimal_C, optimal_sigma);
+C = 1.0;%optimal_C;
+sigma = 0.1%optimal_sigma;
 
 % =========================================================================
 
