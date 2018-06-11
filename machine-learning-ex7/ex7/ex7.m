@@ -86,6 +86,7 @@ max_iters = 10;
 % settings them to be random examples (as can be seen in
 % kMeansInitCentroids).
 initial_centroids = [3 3; 6 2; 8 5];
+initial_centroids = kMeansInitCentroids(X,K);
 
 % Run K-Means algorithm. The 'true' at the end tells our function to plot
 % the progress of K-Means
@@ -106,7 +107,7 @@ pause;
 fprintf('\nRunning K-Means clustering on pixels from an image.\n\n');
 
 %  Load an image of a bird
-A = double(imread('bird_small.png'));
+A = double(imread('do.png'));
 
 % If imread does not work for you, you can try instead
 %   load ('bird_small.mat');
@@ -123,8 +124,8 @@ X = reshape(A, img_size(1) * img_size(2), 3);
 
 % Run your K-Means algorithm on this data
 % You should try different values of K and max_iters here
-K = 16; 
-max_iters = 10;
+K = 12; 
+max_iters = 7;
 
 % When using K-Means, it is important the initialize the centroids
 % randomly. 

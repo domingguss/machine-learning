@@ -30,21 +30,17 @@ centroids = zeros(K, n);
 for k=1:K
   match = (idx == k);
   nfound = numel(find(match == 1));
+  
+  if nfound > 0
 
-  Xk = X .* (match);
+    Xk = X .* (match);
 
-  means = (1/nfound) * sum(Xk);
-  for d=1:n
-    centroids(k,d) = means(1,d);
+    means = (1/nfound) * sum(Xk);
+    centroids(k,:) = means;
   end
-end
+end  
 
 
-
-
-
-% =============================================================
 
 
 end
-
