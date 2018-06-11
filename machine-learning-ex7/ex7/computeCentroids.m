@@ -27,7 +27,17 @@ centroids = zeros(K, n);
 %
 
 
+for k=1:K
+  match = (idx == k);
+  nfound = numel(find(match == 1));
 
+  Xk = X .* (match);
+
+  means = (1/nfound) * sum(Xk);
+  for d=1:n
+    centroids(k,d) = means(1,d);
+  end
+end
 
 
 
