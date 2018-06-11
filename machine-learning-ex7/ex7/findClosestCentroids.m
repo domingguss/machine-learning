@@ -23,8 +23,21 @@ idx = zeros(size(X,1), 1);
 
 
 
-
-
+for i=1:size(X,1)
+  x = X(i,:);
+  min_distance = 1e99;
+  
+  for j=1:K
+    u = centroids(j,:);      
+    distance = sqrt(sum((x .- u).^2));
+    
+    if distance < min_distance
+      idx(i) = j;
+      min_distance = distance;
+    end   
+    
+  end  
+end
 
 
 % =============================================================
