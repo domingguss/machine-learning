@@ -40,21 +40,23 @@ Theta_grad = zeros(size(Theta));
 %                     partial derivatives w.r.t. to each element of Theta
 %
 
-% ---------------- cost function
+% ---------------- cost
 
 prediction = X * Theta';
 movie_rating_error = prediction - Y;
 error_factor = movie_rating_error .* R;
 
-
+% regularization
 theta_regularization = (lambda / 2) * sum(sum(Theta .^ 2));
 X_regularization     = (lambda / 2) * sum(sum(X .^ 2));
-
 regularization = theta_regularization + X_regularization;
+
 J = (1/2) * sum(sum(error_factor .^ 2)) + regularization;
 
-X_grad = error_factor * Theta;
-Theta_grad = error_factor' * X;
+% ---------------- gradients
+
+X_grad = error_factor * Theta + (X .* lambda);
+Theta_grad = error_factor' * X + (Theta .* lambda);
 
 % =============================================================
 
