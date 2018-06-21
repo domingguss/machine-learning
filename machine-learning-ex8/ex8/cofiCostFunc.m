@@ -40,19 +40,16 @@ Theta_grad = zeros(size(Theta));
 %                     partial derivatives w.r.t. to each element of Theta
 %
 
-J = (1/2) * sum(sum((((X * Theta' - Y).* R).^2)));
+% ---------------- cost function
 
+prediction = X * Theta';
+movie_rating_error = prediction - Y;
+error_factor = movie_rating_error .* R;
 
+J = (1/2) * sum(sum(error_factor .^ 2));
 
-
-
-
-
-
-
-
-
-
+X_grad = error_factor * Theta;
+Theta_grad = error_factor' * X;
 
 % =============================================================
 
